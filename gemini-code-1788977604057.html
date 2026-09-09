@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مجموعة فيرا | الانضمام</title>
+    <style>
+        /* إعدادات عامة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #050505; /* خلفية سوداء عميقة */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            padding: 20px;
+        }
+
+        /* كرات الزجاج السائل المظلمة (Black Liquid Blobs) */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            z-index: -1;
+            animation: moveBlobs 12s infinite alternate ease-in-out;
+            opacity: 0.6;
+        }
+        .blob-1 { width: 350px; height: 350px; background: #1e1b4b; top: -5%; left: 10%; } /* كحلي داكن */
+        .blob-2 { width: 450px; height: 450px; background: #312e81; bottom: -10%; right: 5%; } /* أزرق ليلي */
+        .blob-3 { width: 300px; height: 300px; background: #000000; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 100px #4338ca; }
+
+        @keyframes moveBlobs {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, -60px) scale(1.1); }
+        }
+
+        /* بطاقة الزجاج السائل الفخمة */
+        .glass-card {
+            background: rgba(20, 20, 20, 0.4);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            color: #fff;
+            transform: translateY(30px);
+            opacity: 0;
+            animation: slideUp 0.8s ease-out forwards;
+        }
+
+        @keyframes slideUp {
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 32px;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #ffffff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        /* شبكة لترتيب الحقول (حقلين في السطر للكمبيوتر) */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .full-width {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 500px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: #d1d5db;
+            padding-right: 5px;
+        }
+        
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            border-color: #6366f1;
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+        }
+
+        /* تنسيق القائمة المنسدلة */
+        .input-group select option { background: #111; color: #fff; }
+
+        /* زر الإرسال */
+        .btn {
+            grid-column: 1 / -1;
+            width: 100%;
+            padding: 16px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #4f46e5, #3730a3);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        /* نافذة منبثقة (Pop-up) */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden;
+            transition: all 0.4s ease;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            color: #fff;
+            transform: scale(0.8) translateY(20px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 90%; max-width: 380px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+
+        .modal-content h2 { margin-bottom: 12px; font-size: 24px; }
+        .modal-content p { margin-bottom: 25px; font-size: 15px; color: #9ca3af; line-height: 1.5; }
+        
+        .close-btn {
+            background: #4f46e5; padding: 12px 30px; border: none; border-radius: 8px;
+            color: white; cursor: pointer; font-weight: bold; font-size: 15px;
+            transition: background 0.3s; width: 100%;
+        }
+        .close-btn:hover { background: #4338ca; }
+
+        /* Loader */
+        .loader { display: none; border: 3px solid rgba(255,255,255,0.2); border-top: 3px solid #fff; border-radius: 50%; width: 22px; height: 22px; animation: spin 1s linear infinite; margin: 0 auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <!-- كرات الخلفية -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- فورم الانضمام -->
+    <div class="glass-card">
+        <h1>مجموعة فيرا</h1>
+        <p class="subtitle">يرجى تعبئة البيانات التالية لطلب الانضمام</p>
+        
+        <form id="veraForm" class="form-grid">
+            <div class="input-group">
+                <label>الاسم بالكامل</label>
+                <input type="text" id="name" placeholder="اكتب اسمك هنا" required>
+            </div>
+
+            <div class="input-group">
+                <label>العمر</label>
+                <input type="number" id="age" placeholder="مثال: 20" required>
+            </div>
+
+            <div class="input-group full-width">
+                <label>البريد الإلكتروني</label>
+                <input type="email" id="email" placeholder="example@gmail.com" required>
+            </div>
+
+            <div class="input-group">
+                <label>الأكلة المفضلة</label>
+                <input type="text" id="food" placeholder="أكلتك المفضلة" required>
+            </div>
+
+            <div class="input-group">
+                <label>المادة المفضلة</label>
+                <input type="text" id="subject" placeholder="مثال: الرياضيات، البرمجة..." required>
+            </div>
+
+            <div class="input-group full-width">
+                <label>ما هي هوايتك؟</label>
+                <input type="text" id="hobby" placeholder="القراءة، الألعاب، السفر..." required>
+            </div>
+
+            <div class="input-group full-width">
+                <label>هل لديك أي أمراض صحية؟</label>
+                <select id="health" required>
+                    <option value="" disabled selected>اختر الإجابة...</option>
+                    <option value="نعم">نعم</option>
+                    <option value="لا">لا</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn" id="submitBtn">
+                <span id="btnText">إرسال طلب الانضمام</span>
+                <div class="loader" id="btnLoader"></div>
+            </button>
+        </form>
+    </div>
+
+    <!-- النافذة المنبثقة التفاعلية -->
+    <div class="modal-overlay" id="customModal">
+        <div class="modal-content">
+            <h2 id="modalTitle">تنبيه</h2>
+            <p id="modalMessage">الرسالة تظهر هنا.</p>
+            <button class="close-btn" onclick="closeModal()">حسناً</button>
+        </div>
+    </div>
+
+    <script>
+        // ضع الرابط الذي ستحصل عليه من جوجل هنا
+        const GOOGLE_SCRIPT_URL = 'ضع_الرابط_هنا';
+
+        const form = document.getElementById('veraForm');
+        const customModal = document.getElementById('customModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMessage = document.getElementById('modalMessage');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const btnLoader = document.getElementById('btnLoader');
+
+        function showModal(title, message, isError = false) {
+            modalTitle.innerText = title;
+            modalTitle.style.color = isError ? '#ef4444' : '#10b981'; // أحمر للخطأ، أخضر للنجاح
+            modalMessage.innerText = message;
+            customModal.classList.add('active');
+        }
+
+        function closeModal() {
+            customModal.classList.remove('active');
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            btnText.style.display = 'none';
+            btnLoader.style.display = 'block';
+            submitBtn.disabled = true;
+
+            // تجميع البيانات
+            const formData = new FormData();
+            formData.append('name', document.getElementById('name').value);
+            formData.append('age', document.getElementById('age').value);
+            formData.append('email', document.getElementById('email').value);
+            formData.append('food', document.getElementById('food').value);
+            formData.append('subject', document.getElementById('subject').value);
+            formData.append('hobby', document.getElementById('hobby').value);
+            formData.append('health', document.getElementById('health').value);
+
+            try {
+                if(GOOGLE_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbw3UgL71xxdEgVMq3d_pMqh3Px2mVJRT__41KDD7o1ejWnqHZW7ABgkiLCfIt40apLmOQ/exec'){
+                     setTimeout(() => {
+                        showModal('تنبيه! ⚠️', 'التصميم يعمل بامتياز! لكن يجب وضع رابط جوجل شيتس في الكود لكي يتم الإرسال الفعلي.');
+                        btnText.style.display = 'block';
+                        btnLoader.style.display = 'none';
+                        submitBtn.disabled = false;
+                     }, 1500);
+                     return;
+                }
+
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    showModal('تم الاستلام بنجاح! ✨', 'شكراً لك، تم تسجيل بياناتك وسنتواصل معك قريباً.');
+                    form.reset();
+                } else {
+                    throw new Error('Network response was not ok.');
+                }
+            } catch (error) {
+                showModal('خطأ في الاتصال ❌', 'حدث خطأ أثناء إرسال البيانات، تأكد من اتصالك بالإنترنت والمحاولة مجدداً.', true);
+            } finally {
+                btnText.style.display = 'block';
+                btnLoader.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
