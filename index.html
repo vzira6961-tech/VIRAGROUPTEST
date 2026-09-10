@@ -3,347 +3,284 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مجموعة فيرا | طلب الانضمام</title>
+    <title>مجموعة فيرا | الانضمام الأعظم</title>
     <style>
-        /* إعدادات عامة */
+        /* إعدادات عامة وتصميم عصري (Modern UI) */
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Cairo', sans-serif;
         }
 
         body {
             min-height: 100vh;
-            background: #000000; /* أسود نقي */
+            background: #030303;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow-x: hidden;
-            position: relative;
-            padding: 40px 20px;
-        }
-
-        /* كرات الزجاج السائل المظلمة (Deep Black Liquid Blobs) */
-        .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            z-index: -1;
-            animation: moveBlobs 15s infinite alternate ease-in-out;
-            opacity: 0.7;
-        }
-        .blob-1 { width: 400px; height: 400px; background: #0a0a0a; top: -10%; left: 5%; box-shadow: 0 0 120px #2e1065; } 
-        .blob-2 { width: 500px; height: 500px; background: #050505; bottom: -15%; right: -5%; box-shadow: 0 0 150px #1e1b4b; }
-        .blob-3 { width: 350px; height: 350px; background: #000000; top: 40%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 100px #312e81; }
-
-        @keyframes moveBlobs {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(50px, -70px) scale(1.15); }
-        }
-
-        /* بطاقة الزجاج السائل */
-        .glass-card {
-            background: rgba(15, 15, 15, 0.6);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            border-left: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 24px;
-            padding: 40px 30px;
-            width: 100%;
-            max-width: 700px;
-            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.9);
+            padding: 40px 15px;
             color: #fff;
-            transform: translateY(30px);
-            opacity: 0;
-            animation: slideUp 0.8s ease-out forwards;
-            position: relative;
-            z-index: 10;
         }
 
-        @keyframes slideUp {
-            to { transform: translateY(0); opacity: 1; }
+        /* مؤثرات الخلفية العصرية */
+        .glow-bg {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: radial-gradient(circle at 15% 50%, rgba(79, 70, 229, 0.12), transparent 25%),
+                        radial-gradient(circle at 85% 30%, rgba(49, 46, 129, 0.15), transparent 25%);
         }
 
-        h1 {
+        /* حاوية النموذج الزجاجية */
+        .glass-container {
+            background: rgba(15, 15, 18, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px 35px;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header-title {
             text-align: center;
-            margin-bottom: 10px;
-            font-size: 34px;
-            letter-spacing: 1.5px;
-            background: linear-gradient(to right, #ffffff, #818cf8, #ffffff);
-            background-size: 200% auto;
+            margin-bottom: 5px;
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #818cf8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shine 4s linear infinite;
         }
 
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
-
-        p.subtitle {
+        .header-subtitle {
             text-align: center;
-            margin-bottom: 35px;
             color: #9ca3af;
-            font-size: 15px;
+            font-size: 14px;
+            margin-bottom: 30px;
         }
 
-        /* شبكة النماذج المتقدمة */
+        /* فواصل الأقسام */
+        .section-title {
+            font-size: 18px;
+            color: #818cf8;
+            margin: 30px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(129, 140, 248, 0.2);
+            font-weight: 600;
+        }
+
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
-        
-        .full-width {
-            grid-column: span 2;
-        }
 
-        @media (max-width: 600px) {
+        .full-width { grid-column: span 2; }
+
+        @media (max-width: 768px) {
             .form-grid { grid-template-columns: 1fr; }
             .full-width { grid-column: span 1; }
-            .glass-card { padding: 30px 20px; }
-            h1 { font-size: 28px; }
+            .glass-container { padding: 30px 20px; }
         }
 
+        /* حقول الإدخال */
         .input-group label {
             display: block;
             margin-bottom: 8px;
             font-size: 13px;
-            color: #e5e7eb;
-            font-weight: 500;
+            color: #d1d5db;
         }
-        
-        .input-group input, .input-group select {
+
+        .input-group input, .input-group select, .input-group textarea {
             width: 100%;
-            padding: 15px;
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            background: rgba(0, 0, 0, 0.7);
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(0, 0, 0, 0.4);
             color: #fff;
             font-size: 14px;
-            outline: none;
             transition: all 0.3s ease;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+            outline: none;
         }
 
-        .input-group input:focus, .input-group select:focus {
+        .input-group textarea {
+            resize: vertical;
+            min-height: 120px;
+            line-height: 1.6;
+        }
+
+        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
             border-color: #6366f1;
-            background: rgba(0, 0, 0, 0.9);
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.2), inset 0 2px 4px rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.15);
         }
 
-        .input-group select option { background: #0f0f0f; color: #fff; padding: 10px; }
+        .input-group select option { background: #111; color: #fff; }
 
         /* زر الإرسال */
-        .btn {
+        .submit-btn {
             grid-column: 1 / -1;
             width: 100%;
             padding: 18px;
-            margin-top: 15px;
+            margin-top: 20px;
             border: none;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #4f46e5, #312e81);
+            border-radius: 12px;
+            background: linear-gradient(135deg, #4f46e5, #3730a3);
             color: white;
-            font-size: 17px;
-            font-weight: bold;
-            letter-spacing: 1px;
+            font-size: 16px;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(49, 46, 129, 0.5);
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(79, 70, 229, 0.6);
-            background: linear-gradient(135deg, #6366f1, #3730a3);
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(79, 70, 229, 0.5);
         }
 
-        /* النوافذ المنبثقة (Pop-ups) */
+        /* النوافذ المنبثقة التفاعلية */
         .modal-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            inset: 0;
             background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(8px);
             display: flex; justify-content: center; align-items: center;
             opacity: 0; visibility: hidden;
-            transition: all 0.4s ease;
-            z-index: 1000;
+            transition: all 0.3s ease;
+            z-index: 9999;
         }
 
         .modal-content {
-            background: rgba(15, 15, 15, 0.9);
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px 30px;
-            border-radius: 24px;
+            background: #111113;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
             text-align: center;
-            color: #fff;
-            transform: scale(0.7) translateY(30px);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            width: 90%; max-width: 400px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+            max-width: 400px;
+            width: 90%;
         }
 
         .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+        .modal-overlay.active .modal-content { transform: scale(1); }
 
-        .modal-content h2 { margin-bottom: 15px; font-size: 26px; }
-        .modal-content p { margin-bottom: 30px; font-size: 15px; color: #a1a1aa; line-height: 1.6; }
-        
-        .close-btn {
-            background: #4f46e5; padding: 14px 35px; border: none; border-radius: 12px;
-            color: white; cursor: pointer; font-weight: bold; font-size: 16px;
-            transition: all 0.3s; width: 100%;
-        }
-        .close-btn:hover { background: #4338ca; transform: translateY(-2px); }
-
-        /* Loader Animation */
-        .loader-container { display: flex; justify-content: center; margin-bottom: 25px; }
         .spinner {
-            width: 60px; height: 60px;
-            border: 5px solid rgba(255, 255, 255, 0.1);
-            border-top: 5px solid #6366f1;
+            width: 50px; height: 50px;
+            border: 4px solid rgba(255,255,255,0.1);
+            border-top: 4px solid #818cf8;
             border-radius: 50%;
             animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
+        .close-btn {
+            background: #4f46e5; padding: 12px 30px; border: none; border-radius: 10px;
+            color: #fff; cursor: pointer; font-weight: bold; width: 100%; margin-top: 20px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
+    <div class="glow-bg"></div>
 
-    <div class="glass-card">
-        <h1>مجموعة فيرا</h1>
-        <p class="subtitle">استمارة التقييم والانضمام المتقدمة</p>
+    <div class="glass-container">
+        <h1 class="header-title">مجموعة فيرا</h1>
+        <p class="header-subtitle">استمارة الانضمام الأعظم</p>
         
         <form id="veraForm" class="form-grid">
-            <div class="input-group">
-                <label>الاسم بالكامل</label>
-                <input type="text" id="name" placeholder="اكتب اسمك هنا" required>
+            
+            <div class="full-width section-title">أولاً: البيانات الأساسية والتقييم</div>
+
+            <div class="input-group"><label>الاسم بالكامل</label><input type="text" id="name" required></div>
+            <div class="input-group"><label>العمر</label><input type="number" id="age" required></div>
+            <div class="input-group full-width"><label>البريد الإلكتروني</label><input type="email" id="email" required></div>
+            <div class="input-group"><label>الأكلة المفضلة</label><input type="text" id="food" required></div>
+            <div class="input-group"><label>المادة المفضلة</label><input type="text" id="subject" required></div>
+            <div class="input-group full-width"><label>الهواية</label><input type="text" id="hobby" required></div>
+            
+            <div class="input-group"><label>مستعد للمغامرة؟</label>
+                <select id="adventure" required><option value="" disabled selected>اختر...</option><option value="نعم">نعم</option><option value="لا">لا</option></select>
+            </div>
+            <div class="input-group"><label>هل أنت مجتهد؟</label>
+                <select id="diligent" required><option value="" disabled selected>اختر...</option><option value="نعم">نعم</option><option value="لا">لا</option></select>
+            </div>
+            <div class="input-group"><label>سريع التفكير؟</label>
+                <select id="quick" required><option value="" disabled selected>اختر...</option><option value="نعم">نعم</option><option value="لا">لا</option></select>
+            </div>
+            <div class="input-group"><label>أي أمراض صحية؟</label>
+                <select id="health" required><option value="" disabled selected>اختر...</option><option value="نعم">نعم</option><option value="لا">لا</option></select>
             </div>
 
-            <div class="input-group">
-                <label>العمر</label>
-                <input type="number" id="age" placeholder="مثال: 20" required>
+            <!-- أسئلة الانضمام الأعظم -->
+            <div class="full-width section-title">ثانياً: أسئلة الانضمام الأعظم</div>
+
+            <div class="input-group full-width"><label>1. هل أنت مستعد أن تكون بجانب فيرا؟</label>
+                <select id="veraSide" required><option value="" disabled selected>اختر إجابة...</option><option value="نعم">نعم، مستعد تماماً</option><option value="لا">لا</option></select>
+            </div>
+            <div class="input-group full-width"><label>2. هل أنت مستعد أن يكون لك اسم بجانبه ولقب رائع مثله؟</label>
+                <select id="veraTitle" required><option value="" disabled selected>اختر إجابة...</option><option value="نعم">نعم، يشرفني ذلك</option><option value="لا">لا</option></select>
+            </div>
+            <div class="input-group full-width"><label>3. هل أنت مستعد للانضمام لعالمه؟</label>
+                <select id="veraWorld" required><option value="" disabled selected>اختر إجابة...</option><option value="نعم">نعم، أنا جاهز</option><option value="لا">لا</option></select>
+            </div>
+            <div class="input-group full-width"><label>4. هل تملك الولاء والشغف الكافي لرفع راية الكيان؟</label>
+                <select id="veraLoyalty" required><option value="" disabled selected>اختر إجابة...</option><option value="نعم">نعم، بكل تأكيد</option><option value="لا">لا</option></select>
+            </div>
+            <div class="input-group full-width"><label>5. هل تستطيع الصمود وتحمل المسؤولية في الأوقات الصعبة؟</label>
+                <select id="veraResponsibility" required><option value="" disabled selected>اختر إجابة...</option><option value="نعم">نعم، أستطيع</option><option value="لا">لا</option></select>
+            </div>
+            <div class="input-group full-width"><label>6. السؤال المقالي: أوصف نفسك، يومك، وحياتك بالتفصيل.</label>
+                <textarea id="essay" placeholder="تحدث عن نفسك بصدق... (هذا الحقل مهم جداً في التقييم)" required></textarea>
             </div>
 
-            <div class="input-group full-width">
-                <label>البريد الإلكتروني</label>
-                <input type="email" id="email" placeholder="example@gmail.com" required>
-            </div>
-
-            <div class="input-group">
-                <label>الأكلة المفضلة</label>
-                <input type="text" id="food" placeholder="أكلتك المفضلة" required>
-            </div>
-
-            <div class="input-group">
-                <label>المادة المفضلة</label>
-                <input type="text" id="subject" placeholder="مثال: الرياضيات، البرمجة..." required>
-            </div>
-
-            <div class="input-group full-width">
-                <label>ما هي هوايتك؟</label>
-                <input type="text" id="hobby" placeholder="القراءة، الألعاب، السفر..." required>
-            </div>
-
-            <!-- الأسئلة الشخصية الجديدة -->
-            <div class="input-group">
-                <label>هل أنت مستعد للمغامرة؟</label>
-                <select id="adventure" required>
-                    <option value="" disabled selected>اختر إجابة...</option>
-                    <option value="نعم">نعم، بالتأكيد</option>
-                    <option value="لا">لا</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label>هل أنت مجتهد؟</label>
-                <select id="diligent" required>
-                    <option value="" disabled selected>اختر إجابة...</option>
-                    <option value="نعم">نعم</option>
-                    <option value="لا">لا</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label>هل أنت سريع التفكير؟</label>
-                <select id="quick" required>
-                    <option value="" disabled selected>اختر إجابة...</option>
-                    <option value="نعم">نعم</option>
-                    <option value="لا">لا</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label>هل لديك أي أمراض صحية؟</label>
-                <select id="health" required>
-                    <option value="" disabled selected>اختر إجابة...</option>
-                    <option value="نعم">نعم</option>
-                    <option value="لا">لا</option>
-                </select>
-            </div>
-
-            <button type="submit" class="btn" id="submitBtn">إرسال طلب الانضمام</button>
+            <button type="submit" class="submit-btn" id="submitBtn">إرسال طلب الانضمام الأعظم</button>
         </form>
     </div>
 
-    <!-- نافذة الانتظار (Waiting Pop-up) -->
+    <!-- نوافذ التحميل والنتيجة -->
     <div class="modal-overlay" id="waitModal">
         <div class="modal-content">
-            <div class="loader-container">
-                <div class="spinner"></div>
-            </div>
-            <h2>جاري معالجة طلبك...</h2>
-            <p>يرجى الانتظار لحظات، يتم الآن تشفير بياناتك وإرسالها إلى النظام.</p>
+            <div class="spinner"></div>
+            <h2 style="color:#fff; margin-bottom:10px;">جاري توثيق إجاباتك...</h2>
+            <p style="color:#9ca3af; font-size:14px;">يتم الآن تشفير البيانات وإرسالها لفيرا.</p>
         </div>
     </div>
 
-    <!-- نافذة النتيجة (Result Pop-up) -->
     <div class="modal-overlay" id="resultModal">
         <div class="modal-content">
-            <h2 id="modalTitle">تنبيه</h2>
-            <p id="modalMessage">الرسالة تظهر هنا.</p>
+            <h2 id="modalTitle" style="margin-bottom:15px;">تنبيه</h2>
+            <p id="modalMessage" style="color:#9ca3af; font-size:15px;">الرسالة</p>
             <button class="close-btn" onclick="closeModal()">حسناً</button>
         </div>
     </div>
 
     <script>
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzfHBc7qm_wRS3xDi0eAnCkCKH5m_AbcmtH34sgLwaDWcGdhNZFcdJ0qXdzY0Yb9lTOVg/exec';
-
-        const form = document.getElementById('veraForm');
-        const waitModal = document.getElementById('waitModal');
-        const resultModal = document.getElementById('resultModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalMessage = document.getElementById('modalMessage');
-
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxRzPDaBQ0STl-WZ3iT7rSbs1II2bWqWA1sbdKUtzlVUo3ZZ8ujPLf2Ubx39dv1EWppFw/exec';
+        
         function closeModal() {
-            resultModal.classList.remove('active');
-            waitModal.classList.remove('active');
+            document.getElementById('resultModal').classList.remove('active');
         }
 
-        function showResult(title, message, isError = false) {
-            waitModal.classList.remove('active'); // إخفاء نافذة الانتظار
-            modalTitle.innerText = title;
-            modalTitle.style.color = isError ? '#ef4444' : '#10b981';
-            modalMessage.innerText = message;
-            resultModal.classList.add('active'); // إظهار نافذة النتيجة
-        }
-
-        form.addEventListener('submit', async (e) => {
+        document.getElementById('veraForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-
-            // إظهار نافذة الانتظار فور الضغط على إرسال
-            waitModal.classList.add('active');
+            document.getElementById('waitModal').classList.add('active');
 
             const data = {
                 name: document.getElementById('name').value,
@@ -352,29 +289,42 @@
                 food: document.getElementById('food').value,
                 subject: document.getElementById('subject').value,
                 hobby: document.getElementById('hobby').value,
-                adventure: document.getElementById('adventure').value, // جديد
-                diligent: document.getElementById('diligent').value,     // جديد
-                quick: document.getElementById('quick').value,           // جديد
-                health: document.getElementById('health').value
+                adventure: document.getElementById('adventure').value,
+                diligent: document.getElementById('diligent').value,
+                quick: document.getElementById('quick').value,
+                health: document.getElementById('health').value,
+                // الأسئلة الجديدة
+                veraSide: document.getElementById('veraSide').value,
+                veraTitle: document.getElementById('veraTitle').value,
+                veraWorld: document.getElementById('veraWorld').value,
+                veraLoyalty: document.getElementById('veraLoyalty').value,
+                veraResponsibility: document.getElementById('veraResponsibility').value,
+                essay: document.getElementById('essay').value
             };
 
             try {
-                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
 
-                // تأخير بسيط مقصود (ثانية ونصف) لإظهار تأثير المعالجة الفخم
                 setTimeout(() => {
-                    showResult('تم الاستلام بنجاح! ✨', 'لقد تجاوزت التقييم، تم حفظ إجاباتك المشفرة وسنتواصل معك قريباً.');
-                    form.reset();
+                    document.getElementById('waitModal').classList.remove('active');
+                    document.getElementById('modalTitle').innerText = 'تم الاستلام! ✨';
+                    document.getElementById('modalTitle').style.color = '#10b981';
+                    document.getElementById('modalMessage').innerText = 'لقد أتممت أسئلة الانضمام الأعظم بنجاح.';
+                    document.getElementById('resultModal').classList.add('active');
+                    document.getElementById('veraForm').reset();
                 }, 1500);
-
             } catch (error) {
                 setTimeout(() => {
-                    showResult('خطأ في الاتصال ❌', 'حدث خطأ أثناء الإرسال، تأكد من اتصالك بالإنترنت والمحاولة مجدداً.', true);
+                    document.getElementById('waitModal').classList.remove('active');
+                    document.getElementById('modalTitle').innerText = 'خطأ ❌';
+                    document.getElementById('modalTitle').style.color = '#ef4444';
+                    document.getElementById('modalMessage').innerText = 'حدث خطأ في الاتصال، حاول مجدداً.';
+                    document.getElementById('resultModal').classList.add('active');
                 }, 1000);
             }
         });
