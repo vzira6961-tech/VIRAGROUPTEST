@@ -128,7 +128,6 @@
             min-height: 110px;
         }
 
-        /* تنسيق الخيارات والإجابات السريعة */
         .radio-group {
             display: flex;
             gap: 12px;
@@ -194,7 +193,6 @@
             transform: none;
         }
 
-        /* نافذة النجاح Pop-up */
         .modal {
             display: none;
             position: fixed;
@@ -365,11 +363,11 @@
         // ⚙️ إعدادات الرابط والمفاتيح
         // ========================================================
         
-        // 1. رابط الـ Google Apps Script الخاص بك (لحفظ البيانات في الشيت)
+        // 1. رابط الـ Google Apps Script الخاص بك 
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz4hZ0YbH_23wxj-nAu7YUoq9h6CGet-K6ha_LAexG65DBZFa6_cDB3I9OqUtgEEZjgQg/exec'; 
 
-        // 2. مفتاح Web3Forms المجاني (لإرسال الإيميل المباشر)
-        const WEB3FORMS_KEY = 'ضع_مفتاح_WEB3FORMS_هنا'; 
+        // 2. مفتاح Web3Forms الخاص بك 
+        const WEB3FORMS_KEY = '7ad2d708-8d3e-4c15-bc24-b1b2bf56c9a6'; 
 
         // ========================================================
 
@@ -387,20 +385,20 @@
 
             const fetchPromises = [];
 
-            // 1. إرسال إلى Google Sheets
-            if (GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes('https://script.google.com/macros/s/AKfycbz4hZ0YbH_23wxj-nAu7YUoq9h6CGet-K6ha_LAexG65DBZFa6_cDB3I9OqUtgEEZjgQg/exec')) {
+            // 1. إرسال إلى Google Sheets باستخدام URLSearchParams لحل مشكلة الحظر
+            if (GOOGLE_SCRIPT_URL) {
+                const sheetData = new URLSearchParams(formData);
                 fetchPromises.push(
                     fetch(GOOGLE_SCRIPT_URL, {
                         method: 'POST',
                         mode: 'no-cors',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(dataObj)
+                        body: sheetData
                     })
                 );
             }
 
-            // 2. إرسال إيميل مباشر عبر Web3Forms (من المتصفح فوراً)
-            if (WEB3FORMS_KEY && !WEB3FORMS_KEY.includes('7ad2d708-8d3e-4c15-bc24-b1b2bf56c9a6')) {
+            // 2. إرسال إيميل مباشر عبر Web3Forms
+            if (WEB3FORMS_KEY) {
                 const emailFormData = new FormData(form);
                 emailFormData.append('access_key', WEB3FORMS_KEY);
                 emailFormData.append('subject', '🔥 طلب انضمام جديد من: ' + (dataObj.name || 'مستخدم'));
