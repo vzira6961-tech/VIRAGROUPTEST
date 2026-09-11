@@ -3,331 +3,432 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مجموعة فيرا | الانضمام الأعظم</title>
+    <title>استمارة الانضمام - مجموعة فيرا</title>
+    <!-- خط Cairo الفاخر من Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
     <style>
-        /* إعدادات عامة وتصميم عصري (Modern UI) */
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
-        
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: rgba(22, 27, 34, 0.75);
+            --accent-color: #7c3aed;
+            --accent-glow: #8b5cf6;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --input-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
             font-family: 'Cairo', sans-serif;
         }
 
         body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(124, 58, 237, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.1) 0px, transparent 50%);
+            color: var(--text-main);
             min-height: 100vh;
-            background: #030303;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
-            padding: 40px 15px;
-            color: #fff;
+            padding: 20px;
         }
 
-        /* مؤثرات الخلفية العصرية */
-        .glow-bg {
-            position: fixed;
-            width: 100vw;
-            height: 100vh;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            background: radial-gradient(circle at 15% 50%, rgba(79, 70, 229, 0.12), transparent 25%),
-                        radial-gradient(circle at 85% 30%, rgba(49, 46, 129, 0.15), transparent 25%);
-        }
-
-        /* حاوية النموذج الزجاجية */
-        .glass-container {
-            background: rgba(15, 15, 18, 0.7);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 40px 35px;
+        .container {
             width: 100%;
             max-width: 800px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.1);
-            animation: fadeIn 0.8s ease-out;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .header-title {
+        .header {
             text-align: center;
-            margin-bottom: 5px;
-            font-size: 32px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #fff, #818cf8);
+            margin-bottom: 35px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #a78bfa, #c084fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
         }
 
-        .header-subtitle {
-            text-align: center;
-            color: #9ca3af;
-            font-size: 14px;
-            margin-bottom: 30px;
+        .header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
         }
 
-        /* فواصل الأقسام */
         .section-title {
-            font-size: 18px;
-            color: #818cf8;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-glow);
             margin: 30px 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-color);
             padding-bottom: 8px;
-            border-bottom: 1px solid rgba(129, 140, 248, 0.2);
-            font-weight: 600;
         }
 
-        .form-grid {
+        .grid-2 {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
         }
 
-        .full-width { grid-column: span 2; }
-
-        @media (max-width: 768px) {
-            .form-grid { grid-template-columns: 1fr; }
-            .full-width { grid-column: span 1; }
-            .glass-container { padding: 30px 20px; }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 15px;
         }
 
-        /* حقول الإدخال */
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 13px;
+        label {
+            font-size: 0.9rem;
+            font-weight: 600;
             color: #d1d5db;
         }
 
-        .input-group input, .input-group select, .input-group textarea {
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        textarea,
+        select {
             width: 100%;
-            padding: 14px 16px;
+            padding: 12px 16px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(0, 0, 0, 0.4);
             color: #fff;
-            font-size: 14px;
+            font-size: 0.95rem;
             transition: all 0.3s ease;
             outline: none;
         }
 
-        .input-group textarea {
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--accent-glow);
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        textarea {
             resize: vertical;
-            min-height: 120px;
-            line-height: 1.6;
+            min-height: 110px;
         }
 
-        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
-            border-color: #6366f1;
-            background: rgba(0, 0, 0, 0.7);
-            box-shadow: 0 0 15px rgba(99, 102, 241, 0.15);
+        /* تنسيق الخيارات والإجابات السريعة */
+        .radio-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
-        .input-group select option { background: #111; color: #fff; }
+        .radio-option {
+            flex: 1;
+            min-width: 100px;
+        }
 
-        /* زر الإرسال */
-        .submit-btn {
-            grid-column: 1 / -1;
+        .radio-option input {
+            display: none;
+        }
+
+        .radio-option label {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.85rem;
+        }
+
+        .radio-option input:checked + label {
+            background: var(--accent-color);
+            border-color: var(--accent-glow);
+            color: #fff;
+            font-weight: 700;
+            box-shadow: 0 0 10px rgba(124, 58, 237, 0.4);
+        }
+
+        .btn-submit {
             width: 100%;
-            padding: 18px;
-            margin-top: 20px;
+            padding: 16px;
+            margin-top: 25px;
+            background: linear-gradient(135deg, var(--accent-color), #9333ea);
             border: none;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #4f46e5, #3730a3);
-            color: white;
-            font-size: 16px;
+            border-radius: 14px;
+            color: #fff;
+            font-size: 1.1rem;
             font-weight: 700;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(79, 70, 229, 0.5);
-        }
-
-        /* النوافذ المنبثقة التفاعلية */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            display: flex; justify-content: center; align-items: center;
-            opacity: 0; visibility: hidden;
             transition: all 0.3s ease;
-            z-index: 9999;
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(124, 58, 237, 0.5);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* نافذة النجاح Pop-up */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
         }
 
         .modal-content {
-            background: #111113;
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 40px;
+            background: #161b22;
+            border: 1px solid var(--accent-glow);
+            padding: 30px;
             border-radius: 20px;
             text-align: center;
-            transform: scale(0.9);
-            transition: all 0.3s ease;
             max-width: 400px;
-            width: 90%;
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
         }
 
-        .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-overlay.active .modal-content { transform: scale(1); }
+        .modal-content h3 { font-size: 1.5rem; color: #a78bfa; margin-bottom: 10px; }
+        .modal-content p { color: var(--text-muted); margin-bottom: 20px; }
+        .modal-btn {
+            background: var(--accent-color);
+            color: #fff; border: none;
+            padding: 10px 25px; border-radius: 10px;
+            cursor: pointer; font-weight: 700;
+        }
 
         .spinner {
-            width: 50px; height: 50px;
-            border: 4px solid rgba(255,255,255,0.1);
-            border-top: 4px solid #818cf8;
+            width: 20px; height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+            border-top-color: #fff;
+            animation: spin 0.8s linear infinite;
         }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        .close-btn {
-            background: #4f46e5; padding: 12px 30px; border: none; border-radius: 10px;
-            color: #fff; cursor: pointer; font-weight: bold; width: 100%; margin-top: 20px;
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-    <div class="glow-bg"></div>
+    <div class="container">
+        <div class="header">
+            <h1>🔥 طلب انضمام أعظم</h1>
+            <p>قم بملء البيانات التالية بدقة للانضمام لمجموعة فيرا</p>
+        </div>
 
-    <div class="glass-container">
-        <h1 class="header-title">مجموعة فيرا</h1>
-        <p class="header-subtitle">استمارة الانضمام الأعظم</p>
-        
-        <form id="veraForm" class="form-grid">
+        <form id="veraForm">
             
-            <div class="full-width section-title">أولاً: البيانات الأساسية والتقييم</div>
+            <!-- SECTION 1 -->
+            <div class="section-title">👤 البيانات الأساسية</div>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>الاسم الكامل</label>
+                    <input type="text" name="name" required placeholder="أدخل اسمك">
+                </div>
+                <div class="form-group">
+                    <label>العمر</label>
+                    <input type="number" name="age" required placeholder="عمرك">
+                </div>
+            </div>
 
-            <div class="input-group"><label>الاسم بالكامل</label><input type="text" id="name" required></div>
-            <div class="input-group"><label>العمر</label><input type="number" id="age" required></div>
-            <div class="input-group full-width"><label>البريد الإلكتروني</label><input type="email" id="email" required></div>
-            <div class="input-group"><label>الأكلة المفضلة</label><input type="text" id="food" required></div>
-            <div class="input-group"><label>المادة المفضلة</label><input type="text" id="subject" required></div>
-            <div class="input-group full-width"><label>الهواية</label><input type="text" id="hobby" required></div>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" name="email" required placeholder="example@mail.com">
+                </div>
+                <div class="form-group">
+                    <label>الأكلة المفضلة</label>
+                    <input type="text" name="food" placeholder="وجبتك المفضلة">
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>المادة المفضلة</label>
+                    <input type="text" name="subject" placeholder="المادة الدراسية المفضلة">
+                </div>
+                <div class="form-group">
+                    <label>الهواية</label>
+                    <input type="text" name="hobby" placeholder="هوايتك المفضلة">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>هل تعاني من أي أمراض صحية؟</label>
+                <input type="text" name="health" placeholder="اكتب لا يوجد أو أذكر المرض">
+            </div>
+
+            <!-- SECTION 2 -->
+            <div class="section-title">⚡ التقييم السريع</div>
             
-            <div class="input-group"><label>مستعد للمغامرة؟</label>
-                <select id="adventure" required><option value="" disabled selected>اختر...</option><option value="نعم">نعم</option><option value="لا">لا</option></select>
-            </div>
-            <div class="input-group"><label>هل أنت مجتهد؟</label>
-                <select id="diligent" required><option value="" disabled selected>اختر...</option><option value="نعم">نعم</option><option value="لا">لا</option></select>
-            </div>
-            <div class="input-group"><label>سريع التفكير؟</label>
-                <select id="quick" required><option value="" disabled selected>اختر...</option><option value="نعم">نعم</option><option value="لا">لا</option></select>
-            </div>
-            <div class="input-group"><label>أي أمراض صحية؟</label>
-                <select id="health" required><option value="" disabled selected>اختر...</option><option value="نعم">نعم</option><option value="لا">لا</option></select>
+            <div class="form-group">
+                <label>مستعد للمغامرة؟</label>
+                <div class="radio-group">
+                    <div class="radio-option"><input type="radio" id="adv1" name="adventure" value="نعم" checked><label for="adv1">نعم</label></div>
+                    <div class="radio-option"><input type="radio" id="adv2" name="adventure" value="لا"><label for="adv2">لا</label></div>
+                    <div class="radio-option"><input type="radio" id="adv3" name="adventure" value="إلى حد ما"><label for="adv3">إلى حد ما</label></div>
+                </div>
             </div>
 
-            <!-- أسئلة الانضمام الأعظم -->
-            <div class="full-width section-title">ثانياً: أسئلة الانضمام الأعظم</div>
-
-            <div class="input-group full-width"><label>1. هل أنت مستعد أن تكون بجانب فيرا؟</label>
-                <select id="veraSide" required><option value="" disabled selected>اختر إجابة...</option><option value="نعم">نعم، مستعد تماماً</option><option value="لا">لا</option></select>
-            </div>
-            <div class="input-group full-width"><label>2. هل أنت مستعد أن يكون لك اسم بجانبه ولقب رائع مثله؟</label>
-                <select id="veraTitle" required><option value="" disabled selected>اختر إجابة...</option><option value="نعم">نعم، يشرفني ذلك</option><option value="لا">لا</option></select>
-            </div>
-            <div class="input-group full-width"><label>3. هل أنت مستعد للانضمام لعالمه؟</label>
-                <select id="veraWorld" required><option value="" disabled selected>اختر إجابة...</option><option value="نعم">نعم، أنا جاهز</option><option value="لا">لا</option></select>
-            </div>
-            <div class="input-group full-width"><label>4. هل تملك الولاء والشغف الكافي لرفع راية الكيان؟</label>
-                <select id="veraLoyalty" required><option value="" disabled selected>اختر إجابة...</option><option value="نعم">نعم، بكل تأكيد</option><option value="لا">لا</option></select>
-            </div>
-            <div class="input-group full-width"><label>5. هل تستطيع الصمود وتحمل المسؤولية في الأوقات الصعبة؟</label>
-                <select id="veraResponsibility" required><option value="" disabled selected>اختر إجابة...</option><option value="نعم">نعم، أستطيع</option><option value="لا">لا</option></select>
-            </div>
-            <div class="input-group full-width"><label>6. السؤال المقالي: أوصف نفسك، يومك، وحياتك بالتفصيل.</label>
-                <textarea id="essay" placeholder="تحدث عن نفسك بصدق... (هذا الحقل مهم جداً في التقييم)" required></textarea>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>هل أنت شخص مجتهد؟</label>
+                    <input type="text" name="diligent" placeholder="توصيف بسيط">
+                </div>
+                <div class="form-group">
+                    <label>هل أنت سريع التفكير؟</label>
+                    <input type="text" name="quick" placeholder="توصيف بسيط">
+                </div>
             </div>
 
-            <button type="submit" class="submit-btn" id="submitBtn">إرسال طلب الانضمام الأعظم</button>
+            <!-- SECTION 3 -->
+            <div class="section-title">👑 أسئلة الانضمام الأعظم</div>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>جاهز لقتال من أجل فيرا؟</label>
+                    <input type="text" name="veraSide" placeholder="إجابتك">
+                </div>
+                <div class="form-group">
+                    <label>جاهز لحمل لقب رائع؟</label>
+                    <input type="text" name="veraTitle" placeholder="إجابتك">
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>جاهز لدخول عالمه؟</label>
+                    <input type="text" name="veraWorld" placeholder="إجابتك">
+                </div>
+                <div class="form-group">
+                    <label>مستوى الولاء لديك</label>
+                    <input type="text" name="veraLoyalty" placeholder="من 1 إلى 10 أو وصف">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>مدى قدرتك على تحمل المسؤولية</label>
+                <input type="text" name="veraResponsibility" placeholder="وصف قدرتك">
+            </div>
+
+            <!-- SECTION 4 -->
+            <div class="section-title">✍️ الوصف الشخصي</div>
+            <div class="form-group">
+                <label>اكتب نبذة عن نفسك ولماذا تستحق الانضمام؟</label>
+                <textarea name="essay" required placeholder="تحدث عن نفسك بكل حريّة..."></textarea>
+            </div>
+
+            <button type="submit" id="submitBtn" class="btn-submit">
+                <span>إرسال طلب الانضمام</span> 🚀
+            </button>
         </form>
     </div>
 
-    <!-- نوافذ التحميل والنتيجة -->
-    <div class="modal-overlay" id="waitModal">
+    <!-- Modal Success -->
+    <div id="successModal" class="modal">
         <div class="modal-content">
-            <div class="spinner"></div>
-            <h2 style="color:#fff; margin-bottom:10px;">جاري توثيق إجاباتك...</h2>
-            <p style="color:#9ca3af; font-size:14px;">يتم الآن تشفير البيانات وإرسالها لفيرا.</p>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="resultModal">
-        <div class="modal-content">
-            <h2 id="modalTitle" style="margin-bottom:15px;">تنبيه</h2>
-            <p id="modalMessage" style="color:#9ca3af; font-size:15px;">الرسالة</p>
-            <button class="close-btn" onclick="closeModal()">حسناً</button>
+            <h3>🎉 تم الإرسال بنجاح!</h3>
+            <p>تم حفظ بياناتك وإرسال الإشعار فوراً إلى الإدارة.</p>
+            <button class="modal-btn" onclick="closeModal()">رائع!</button>
         </div>
     </div>
 
     <script>
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxRzPDaBQ0STl-WZ3iT7rSbs1II2bWqWA1sbdKUtzlVUo3ZZ8ujPLf2Ubx39dv1EWppFw/exec';
+        // ========================================================
+        // ⚙️ إعدادات الرابط والمفاتيح
+        // ========================================================
         
-        function closeModal() {
-            document.getElementById('resultModal').classList.remove('active');
-        }
+        // 1. رابط الـ Google Apps Script الخاص بك (لحفظ البيانات في الشيت)
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz4hZ0YbH_23wxj-nAu7YUoq9h6CGet-K6ha_LAexG65DBZFa6_cDB3I9OqUtgEEZjgQg/exec'; 
 
-        document.getElementById('veraForm').addEventListener('submit', async (e) => {
+        // 2. مفتاح Web3Forms المجاني (لإرسال الإيميل المباشر)
+        const WEB3FORMS_KEY = 'ضع_مفتاح_WEB3FORMS_هنا'; 
+
+        // ========================================================
+
+        const form = document.getElementById('veraForm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
-            document.getElementById('waitModal').classList.add('active');
 
-            const data = {
-                name: document.getElementById('name').value,
-                age: document.getElementById('age').value,
-                email: document.getElementById('email').value,
-                food: document.getElementById('food').value,
-                subject: document.getElementById('subject').value,
-                hobby: document.getElementById('hobby').value,
-                adventure: document.getElementById('adventure').value,
-                diligent: document.getElementById('diligent').value,
-                quick: document.getElementById('quick').value,
-                health: document.getElementById('health').value,
-                // الأسئلة الجديدة
-                veraSide: document.getElementById('veraSide').value,
-                veraTitle: document.getElementById('veraTitle').value,
-                veraWorld: document.getElementById('veraWorld').value,
-                veraLoyalty: document.getElementById('veraLoyalty').value,
-                veraResponsibility: document.getElementById('veraResponsibility').value,
-                essay: document.getElementById('essay').value
-            };
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<div class="spinner"></div> جاري الإرسال...';
+
+            const formData = new FormData(form);
+            const dataObj = Object.fromEntries(formData.entries());
+
+            const fetchPromises = [];
+
+            // 1. إرسال إلى Google Sheets
+            if (GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes('https://script.google.com/macros/s/AKfycbz4hZ0YbH_23wxj-nAu7YUoq9h6CGet-K6ha_LAexG65DBZFa6_cDB3I9OqUtgEEZjgQg/exec')) {
+                fetchPromises.push(
+                    fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(dataObj)
+                    })
+                );
+            }
+
+            // 2. إرسال إيميل مباشر عبر Web3Forms (من المتصفح فوراً)
+            if (WEB3FORMS_KEY && !WEB3FORMS_KEY.includes('7ad2d708-8d3e-4c15-bc24-b1b2bf56c9a6')) {
+                const emailFormData = new FormData(form);
+                emailFormData.append('access_key', WEB3FORMS_KEY);
+                emailFormData.append('subject', '🔥 طلب انضمام جديد من: ' + (dataObj.name || 'مستخدم'));
+                emailFormData.append('from_name', 'مجموعة فيرا');
+
+                fetchPromises.push(
+                    fetch('https://api.web3forms.com/submit', {
+                        method: 'POST',
+                        body: emailFormData
+                    })
+                );
+            }
 
             try {
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-
-                setTimeout(() => {
-                    document.getElementById('waitModal').classList.remove('active');
-                    document.getElementById('modalTitle').innerText = 'تم الاستلام! ✨';
-                    document.getElementById('modalTitle').style.color = '#10b981';
-                    document.getElementById('modalMessage').innerText = 'لقد أتممت أسئلة الانضمام الأعظم بنجاح.';
-                    document.getElementById('resultModal').classList.add('active');
-                    document.getElementById('veraForm').reset();
-                }, 1500);
-            } catch (error) {
-                setTimeout(() => {
-                    document.getElementById('waitModal').classList.remove('active');
-                    document.getElementById('modalTitle').innerText = 'خطأ ❌';
-                    document.getElementById('modalTitle').style.color = '#ef4444';
-                    document.getElementById('modalMessage').innerText = 'حدث خطأ في الاتصال، حاول مجدداً.';
-                    document.getElementById('resultModal').classList.add('active');
-                }, 1000);
+                await Promise.allSettled(fetchPromises);
+                document.getElementById('successModal').style.display = 'flex';
+                form.reset();
+            } catch (err) {
+                alert('حدث خطأ أثناء الإرسال، برجاء المحاولة لاحقاً.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span>إرسال طلب الانضمام</span> 🚀';
             }
         });
+
+        function closeModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
     </script>
 </body>
 </html>
